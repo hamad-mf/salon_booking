@@ -32,6 +32,11 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
+
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [Center(child: Text("user home screen"))],
+      ),
     );
   }
 }

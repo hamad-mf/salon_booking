@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salon_booking/login_screen.dart';
 import 'package:salon_booking/sign_up_screen.dart';
 
@@ -21,46 +22,46 @@ class OnboardingScreen extends StatelessWidget {
           // Other elements over the image
           Center(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(height: 415),
+                  SizedBox(height: 415.h),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    height: 120,
+                    padding: EdgeInsets.symmetric(horizontal: 20.w),
+                    height: 120.h,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(12.r),
 
                       color: Colors.white,
                     ),
 
                     child: Column(
                       children: [
-                        SizedBox(height: 20),
+                        SizedBox(height: 20.h),
                         Text(
                           "Let us make your day",
                           style: TextStyle(
                             color: Color(0xff1E2676),
-                            fontSize: 20,
+                            fontSize: 20.sp,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
                         Text(
                           textAlign: TextAlign.justify,
-                          style: TextStyle(fontSize: 14),
+                          style: TextStyle(fontSize: 14.sp),
                           "Welcome to SalonHub, where grooming meets convenience. Choose your path to a ",
                         ),
                         Text(
                           textAlign: TextAlign.justify,
-                          style: TextStyle(fontSize: 14),
+                          style: TextStyle(fontSize: 14.sp),
                           "sharper look",
                         ),
                       ],
                     ),
                   ),
-                  SizedBox(height: 30),
+                  SizedBox(height: 30.h),
                   InkWell(
                     onTap: () {
                       Navigator.push(
@@ -69,10 +70,10 @@ class OnboardingScreen extends StatelessWidget {
                       );
                     },
                     child: Container(
-                      height: 45,
-                      width: 250,
+                      height: 45.h,
+                      width: 250.w,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(20.r),
 
                         color: Color(0xff1E2676),
                       ),
@@ -82,14 +83,14 @@ class OnboardingScreen extends StatelessWidget {
                           "Log in",
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 20,
+                            fontSize: 20.sp,
                             fontWeight: FontWeight.w900,
                           ),
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(height: 30),
+                  SizedBox(height: 30.h),
                   InkWell(
                     onTap: () {
                       Navigator.push(
@@ -98,10 +99,10 @@ class OnboardingScreen extends StatelessWidget {
                       );
                     },
                     child: Container(
-                      height: 45,
-                      width: 250,
+                      height: 45.h,
+                      width: 250.w,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(20.r),
 
                         color: Color(0xffffffff),
                       ),
@@ -111,7 +112,7 @@ class OnboardingScreen extends StatelessWidget {
                           "Sign Up",
                           style: TextStyle(
                             color: Color(0xff1E2676),
-                            fontSize: 20,
+                            fontSize: 20.sp,
                             fontWeight: FontWeight.w900,
                           ),
                         ),
@@ -119,7 +120,7 @@ class OnboardingScreen extends StatelessWidget {
                     ),
                   ),
                 ],
-              ),
+              ),  
             ),
           ),
         ],

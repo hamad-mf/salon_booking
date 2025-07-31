@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:salon_booking/home_screen.dart';
 import 'package:salon_booking/onboarding_screen.dart';
+import 'package:salon_booking/profile_selection_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -43,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
         // Navigate to onBoarding screen
         log("false");
         Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (_) => OnboardingScreen()));
+            MaterialPageRoute(builder: (_) => ProfileSelectionScreen()));
       }
     });
   }

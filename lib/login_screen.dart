@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:salon_booking/Controller/sign_in_controller.dart';
 import 'package:salon_booking/sign_up_screen.dart';
@@ -36,14 +37,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           'Log in',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 24,
+                            fontSize: 24.sp,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
 
                         Container(
-                          width: 400, // Adjust width as needed
-                          padding: EdgeInsets.all(16),
+                          width: 400.w, // Adjust width as needed
+                          padding: EdgeInsets.all(16.w),
                           child: Text(
                             'If you are a returning user, access your account and continue your grooming journey seamlessly',
                             maxLines: 3,
@@ -51,7 +52,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 TextOverflow
                                     .ellipsis, // Adds ... if text overflows
                             textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 16, color: Colors.white),
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ],
@@ -112,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   //     ],
                                   //   ),
                                   // ),
-                                  SizedBox(height: 70),
+                                  SizedBox(height: 70.h),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -120,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         "New user?",
                                         style: TextStyle(
                                           color: Colors.black,
-                                          fontSize: 16,
+                                          fontSize: 16.sp,
                                           fontWeight: FontWeight.w600,
                                         ),
                                       ),
@@ -138,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           " Create account",
                                           style: TextStyle(
                                             color: Colors.black,
-                                            fontSize: 16,
+                                            fontSize: 16.sp,
                                             fontWeight: FontWeight.w900,
                                           ),
                                         ),
@@ -156,16 +160,16 @@ class _LoginScreenState extends State<LoginScreen> {
           // Center, big box overlapping the split
           Center(
             child: Container(
-              height: 270,
-              width: 320,
+              height: 270.h,
+              width: 320.w,
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(28),
+                borderRadius: BorderRadius.circular(28.r),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black12,
-                    blurRadius: 16,
-                    spreadRadius: 4,
+                    blurRadius: 16.r,
+                    spreadRadius: 4.r,
                   ),
                 ],
               ),
@@ -191,12 +195,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.blue,
-                                width: 2,
+                                width: 2.w,
                               ), // underline when focused
                             ),
                             hintText: 'Email',
                             contentPadding: EdgeInsets.symmetric(
-                              vertical: 8,
+                              vertical: 8.h,
                             ), // optional: adjusts spacing
                           ),
 
@@ -227,12 +231,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.blue,
-                                width: 2,
+                                width: 2.w,
                               ), // underline when focused
                             ),
                             hintText: 'Password',
                             contentPadding: EdgeInsets.symmetric(
-                              vertical: 8,
+                              vertical: 8.h,
                             ), // optional: adjusts spacing
                           ),
                           validator: (value) {
@@ -259,7 +263,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Text("Remember me"),
                           ],
                         ),
-                        SizedBox(height: 20),
+                        SizedBox(height: 20.h),
                         InkWell(
                           onTap: () {
                             if (_formKey.currentState!.validate()) {
@@ -276,10 +280,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               context.watch<SignInController>().isLoading
                                   ? Center(child: CircularProgressIndicator())
                                   : Container(
-                                    height: 45,
-                                    width: 250,
+                                    height: 45.h,
+                                    width: 250.w,
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
+                                      borderRadius: BorderRadius.circular(20.r),
 
                                       color: Color(0xff1E2676),
                                     ),
@@ -289,14 +293,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                         "Log in",
                                         style: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 20,
+                                          fontSize: 20.sp,
                                           fontWeight: FontWeight.w900,
                                         ),
                                       ),
                                     ),
                                   ),
                         ),
-                        SizedBox(height: 10),
+                        SizedBox(height: 10.h),
                         Center(child: Text("Forgot your password")),
                       ],
                     ),

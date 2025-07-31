@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -42,6 +43,7 @@ class SignUpController with ChangeNotifier {
     required String password,
     required BuildContext context,
   }) async {
+    log("called on register");
     isLoading = true;
     notifyListeners();
 
@@ -50,18 +52,18 @@ class SignUpController with ChangeNotifier {
           .createUserWithEmailAndPassword(email: email, password: password);
 
       if (credential.user?.uid != null) {
-               SharedPreferences prefs = await SharedPreferences.getInstance();
+        SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setBool('isLoggedIn', true);
-        
+
         AppUtils.showOnetimeSnackbar(
           context: context,
           message: "Registration success",
           bg: Colors.green,
         );
 
-        Navigator.pushReplacement(
+        Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => HomeScreen()),
+          MaterialPageRoute(builder: (context) => HomeScreen()),(route) => false,
         );
       }
     } on FirebaseAuthException catch (e) {
@@ -90,5 +92,36 @@ class SignUpController with ChangeNotifier {
     }
     isLoading = false;
     notifyListeners();
+  }
+
+  Future<void> onAddProfile({
+    required String name,
+    required String phn,
+    required String role,
+    required BuildContext context,
+  }) async {
+    try {
+      log("called on add profile");
+      final User? user = FirebaseAuth.instance.currentUser;
+
+      if (user == null) {
+        AppUtils.showOnetimeSnackbar(
+          context: context,
+          message: "please wait",
+          bg: Colors.red,
+        );
+        return;
+      }
+
+      final String uid = user.uid;
+      log("User's uid is : $uid");
+
+      await FirebaseFirestore.instance
+          .collection('profile_details')
+          .doc(uid)
+          .set({'name': name, 'phone number': phn,'role':role});
+    } catch (e) {
+      log("error addng profile $e");
+    }
   }
 }

@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:salon_booking/Controller/sign_up_controller.dart';
 import 'package:salon_booking/login_screen.dart';
@@ -35,19 +37,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: Center(
                     child: Column(
                       children: [
-                        SizedBox(height: 50),
+                        SizedBox(height: 50.h),
                         Text(
                           'Sgin up',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 24,
+                            fontSize: 24.sp,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
 
                         Container(
-                          width: 400, // Adjust width as needed
-                          padding: EdgeInsets.all(16),
+                          width: 400.w, // Adjust width as needed
+                          padding: EdgeInsets.all(16.w),
                           child: Text(
                             'New to SwiftTrim? Join us now to unlock personalized grooming experiences and exclusive offers',
                             maxLines: 3,
@@ -55,7 +57,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 TextOverflow
                                     .ellipsis, // Adds ... if text overflows
                             textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 16, color: Colors.white),
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ],
@@ -71,7 +76,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SizedBox(height: 250),
+                          SizedBox(height: 250.h),
 
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -80,7 +85,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 "have account?",
                                 style: TextStyle(
                                   color: Colors.black,
-                                  fontSize: 16,
+                                  fontSize: 16.sp,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
@@ -97,7 +102,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   " Sing In",
                                   style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 16,
+                                    fontSize: 16.sp,
                                     fontWeight: FontWeight.w900,
                                   ),
                                 ),
@@ -115,22 +120,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
           // Center, big box overlapping the split
           Center(
             child: Container(
-              height: 460,
-              width: 320,
+              height: 460.h,
+              width: 320.w,
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(28),
+                borderRadius: BorderRadius.circular(28.r),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black12,
-                    blurRadius: 16,
-                    spreadRadius: 4,
+                    blurRadius: 16.r,
+                    spreadRadius: 4.r,
                   ),
                 ],
               ),
               child: Center(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30),
+                  padding: EdgeInsets.symmetric(horizontal: 30.h),
                   child: Form(
                     key: _formKey,
 
@@ -156,7 +161,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             hintText: 'Name',
                             contentPadding: EdgeInsets.symmetric(
-                              vertical: 8,
+                              vertical: 8.h,
                             ), // optional: adjusts spacing
                           ),
                           validator: (value) {
@@ -181,12 +186,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.blue,
-                                width: 2,
+                                width: 2.w,
                               ), // underline when focused
                             ),
                             hintText: 'Email',
                             contentPadding: EdgeInsets.symmetric(
-                              vertical: 8,
+                              vertical: 8.h,
                             ), // optional: adjusts spacing
                           ),
                           validator: (value) {
@@ -217,12 +222,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.blue,
-                                width: 2,
+                                width: 2.w,
                               ), // underline when focused
                             ),
                             hintText: 'Phone number',
                             contentPadding: EdgeInsets.symmetric(
-                              vertical: 8,
+                              vertical: 8.h,
                             ), // optional: adjusts spacing
                           ),
 
@@ -247,12 +252,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.blue,
-                                width: 2,
+                                width: 2.w,
                               ), // underline when focused
                             ),
                             hintText: 'password',
                             contentPadding: EdgeInsets.symmetric(
-                              vertical: 8,
+                              vertical: 8.h,
                             ), // optional: adjusts spacing
                           ),
                           validator: (value) {
@@ -278,12 +283,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.blue,
-                                width: 2,
+                                width: 2.w,
                               ), // underline when focused
                             ),
                             hintText: 'Confirm password',
                             contentPadding: EdgeInsets.symmetric(
-                              vertical: 8,
+                              vertical: 8.h,
                             ), // optional: adjusts spacing
                           ),
                           validator: (value) {
@@ -307,41 +312,46 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             Text("Remember me"),
                           ],
                         ),
-                        SizedBox(height: 20),
+                        SizedBox(height: 20.h),
                         InkWell(
-                          onTap: () {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => LoginScreen(),
-                            //   ),
-                            // );
-                            if (_formKey.currentState!.validate()) {
-                              context.read<SignUpController>().onRegistration(
-                                email: _emailController.text,
-                                password: _passwordController.text,
-                                context: context,
-                              );
-                            }
-                          },
+                         onTap: () async {
+  if (_formKey.currentState!.validate()) {
+    final signUpCtrl = context.read<SignUpController>();
+    await signUpCtrl.onRegistration(
+      email: _emailController.text,
+      password: _passwordController.text,
+      context: context,
+    );
+    // Check: If registration failed, don't proceed
+    if (FirebaseAuth.instance.currentUser != null) {
+      await signUpCtrl.onAddProfile(
+        name: _nameController.text,
+        role: "user",
+        phn: _phoneNumberController.text,
+        context: context,
+      );
+    }
+  }
+}
+,
                           child:
                               context.watch<SignUpController>().isLoading
                                   ? Center(child: CircularProgressIndicator())
                                   : Container(
-                                    height: 45,
-                                    width: 250,
+                                    height: 45.h,
+                                    width: 250.w,
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
+                                      borderRadius: BorderRadius.circular(20.r),
 
                                       color: Color(0xff1E2676),
                                     ),
 
                                     child: Center(
                                       child: Text(
-                                        "Log in",
+                                        "Sign Up",
                                         style: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 20,
+                                          fontSize: 20.sp,
                                           fontWeight: FontWeight.w900,
                                         ),
                                       ),
