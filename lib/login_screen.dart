@@ -69,9 +69,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         ? Center(child: CircularProgressIndicator())
                         : InkWell(
                           onTap: () {
-                            context.read<SignInController>().signInWithGoogle(
-                              context,
-                            );
+                            // context.read<SignInController>().signInWithGoogle(
+                            //   context,
+                            // );
                           },
                           child: Container(
                             color: Colors.white,
@@ -160,7 +160,7 @@ class _LoginScreenState extends State<LoginScreen> {
           // Center, big box overlapping the split
           Center(
             child: Container(
-              height: 270.h,
+              height: 330.h,
               width: 320.w,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -268,6 +268,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           onTap: () {
                             if (_formKey.currentState!.validate()) {
                               context.read<SignInController>().onLogin(
+                                isOwner: false,
                                 email: _emailController.text,
                                 password: _passwordController.text,
                                 context: context,

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:salon_booking/home_screen.dart';
 import 'package:salon_booking/onboarding_screen.dart';
+import 'package:salon_booking/profile_selection_screen.dart';
 import 'package:salon_booking/utils/app_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,16 +17,11 @@ class SignUpController with ChangeNotifier {
     try {
       await FirebaseAuth.instance.signOut();
 
-      // Optionally show a success message
-      AppUtils.showOnetimeSnackbar(
-        context: context,
-        message: "Signed out successfully",
-        bg: Colors.green,
-      );
+    
 
       Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => OnboardingScreen()),
+        MaterialPageRoute(builder: (context) => ProfileSelectionScreen()),
         (route) => false,
       );
     } catch (e) {
