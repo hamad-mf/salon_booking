@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:salon_booking/Controller/booking_controller.dart';
+import 'package:salon_booking/Controller/salon_add_controller.dart';
 import 'package:salon_booking/Controller/sign_in_controller.dart';
 import 'package:salon_booking/Controller/sign_up_controller.dart';
 
@@ -22,6 +24,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => SignUpController()),
         ChangeNotifierProvider(create: (context) => SignInController()),
+        ChangeNotifierProvider(create: (context) => SalonAddController()),
+        ChangeNotifierProvider(create: (context) => BookingController()),
       ],
       child: ScreenUtilInit(
         designSize: Size(393, 852),

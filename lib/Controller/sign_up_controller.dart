@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:salon_booking/Widgets/custom_bottom_navbar_screen.dart';
 import 'package:salon_booking/home_screen.dart';
 import 'package:salon_booking/onboarding_screen.dart';
 import 'package:salon_booking/profile_selection_screen.dart';
@@ -59,7 +60,7 @@ class SignUpController with ChangeNotifier {
 
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => HomeScreen()),(route) => false,
+          MaterialPageRoute(builder: (context) => CustomBottomNavbarScreen()),(route) => false,
         );
       }
     } on FirebaseAuthException catch (e) {

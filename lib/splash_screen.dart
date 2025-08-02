@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:salon_booking/Salon%20Owner%20Screens/salon_owner_home.dart';
+import 'package:salon_booking/Widgets/custom_bottom_navbar_screen.dart';
 import 'package:salon_booking/home_screen.dart';
 import 'package:salon_booking/onboarding_screen.dart';
 import 'package:salon_booking/profile_selection_screen.dart';
@@ -36,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
         // Navigate to
         Navigator.of(
           context,
-        ).pushReplacement(MaterialPageRoute(builder: (_) => HomeScreen()));
+        ).pushReplacement(MaterialPageRoute(builder: (_) => CustomBottomNavbarScreen()));
       } else if (isOwnerLoggedIn) {
         Navigator.of(
           context,

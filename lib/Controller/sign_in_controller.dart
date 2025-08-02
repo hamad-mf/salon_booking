@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:salon_booking/Salon%20Owner%20Screens/salon_owner_home.dart';
+import 'package:salon_booking/Widgets/custom_bottom_navbar_screen.dart';
 import 'package:salon_booking/home_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -76,7 +77,7 @@ class SignInController with ChangeNotifier {
           } else {
             Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (_) => HomeScreen()),
+              MaterialPageRoute(builder: (_) => CustomBottomNavbarScreen()),
               (route) => false,
             );
           }
