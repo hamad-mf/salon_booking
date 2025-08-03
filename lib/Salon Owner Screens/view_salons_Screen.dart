@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -31,7 +32,13 @@ class _ViewSalonsScreenState extends State<ViewSalonsScreen> {
         errorMessage = '';
       });
 
-      QuerySnapshot querySnapshot = await _firestore.collection('salons').get();
+    String? currentUserId = FirebaseAuth.instance.currentUser?.uid;
+if (currentUserId == null) return;
+
+QuerySnapshot querySnapshot = await _firestore
+    .collection('salons')
+    .where('userId', isEqualTo: currentUserId)
+    .get();
       log(querySnapshot.docs.toString());
       List<Map<String, dynamic>> fetchedSalons = [];
 

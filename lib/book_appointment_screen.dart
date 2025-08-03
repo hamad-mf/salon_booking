@@ -924,6 +924,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                 ],
               ),
         );
+        controller.clearMessages();
       }
     }
   }

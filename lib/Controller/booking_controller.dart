@@ -170,6 +170,27 @@ class BookingController extends ChangeNotifier {
     return seatLabels;
   }
 
+
+
+Future<bool> cancelBooking(String salonId, String bookingId) async {
+  try {
+    await _firestore
+        .collection('salons')
+        .doc(salonId)
+        .collection('bookings')
+        .doc(bookingId)
+        .update({
+      'status': 'cancelled',
+      'cancelledAt': FieldValue.serverTimestamp(),
+    });
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+
+
   // Load available seats for selected date/time
   Future<void> loadAvailableSeats(String salonId) async {
     if (_selectedDate == null) return;

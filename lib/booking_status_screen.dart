@@ -5,27 +5,57 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:salon_booking/Controller/booking_controller.dart';
 
 class UserBookingsScreen extends StatefulWidget {
-
-
-  const UserBookingsScreen({super.key,});
+  const UserBookingsScreen({super.key});
 
   @override
   State<UserBookingsScreen> createState() => _UserBookingsScreenState();
 }
 
 class _UserBookingsScreenState extends State<UserBookingsScreen> {
+  void _cancelBooking(String salonId, String bookingId) async {
+    bool? confirm = await showDialog<bool>(
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            title: Text('Cancel Booking'),
+            content: Text('Are you sure you want to cancel this booking?'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context, false),
+                child: Text('No'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(context, true),
+                child: Text('Yes, Cancel'),
+              ),
+            ],
+          ),
+    );
+
+    if (confirm == true) {
+      // Use your booking controller here
+      // bookingController.cancelBooking(salonId, bookingId);
+
+      final controller = context.read<BookingController>();
+      controller.cancelBooking(salonId, bookingId);
+    }
+  }
+
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
- void _debugBookings() async {
+  void _debugBookings() async {
     try {
       String? userId = FirebaseAuth.instance.currentUser?.uid;
-      QuerySnapshot snapshot = await _firestore
-          .collectionGroup('bookings')
-          .where('userId', isEqualTo: userId)
-          .get();
-      
+      QuerySnapshot snapshot =
+          await _firestore
+              .collectionGroup('bookings')
+              .where('userId', isEqualTo: userId)
+              .get();
+
       log('Debug: Found ${snapshot.docs.length} bookings for user: $userId');
       for (var doc in snapshot.docs) {
         Map<String, dynamic>? data = doc.data() as Map<String, dynamic>?;
@@ -36,13 +66,11 @@ class _UserBookingsScreenState extends State<UserBookingsScreen> {
     }
   }
 
- @override
+  @override
   void initState() {
     super.initState();
     _debugBookings(); // Add this line
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +89,10 @@ class _UserBookingsScreenState extends State<UserBookingsScreen> {
         stream:
             _firestore
                 .collectionGroup('bookings')
-                .where('userId', isEqualTo: FirebaseAuth.instance.currentUser?.uid)
+                .where(
+                  'userId',
+                  isEqualTo: FirebaseAuth.instance.currentUser?.uid,
+                )
                 .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -468,6 +499,22 @@ class _UserBookingsScreenState extends State<UserBookingsScreen> {
                           ),
                         ),
                       ],
+                    ),
+                  ),
+                ],
+
+                if (status == 'pending' || status == 'confirmed') ...[
+                  SizedBox(height: 12.h),
+                  SizedBox(
+                    width: double.infinity,
+                    child: OutlinedButton.icon(
+                      onPressed: () => _cancelBooking(salonId, booking.id),
+                      icon: Icon(Icons.cancel_outlined, size: 16.sp),
+                      label: Text('Cancel Booking'),
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: Colors.blue,
+                        side: BorderSide(color: Colors.red.shade300),
+                      ),
                     ),
                   ),
                 ],

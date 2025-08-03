@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -5,6 +6,7 @@ import 'package:salon_booking/Controller/sign_up_controller.dart';
 import 'package:salon_booking/Salon%20Owner%20Screens/add_salon_screen.dart';
 import 'package:salon_booking/Salon%20Owner%20Screens/view_salons_Screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:developer';
 
 class SalonOwnerHome extends StatefulWidget {
   const SalonOwnerHome({super.key});
@@ -14,8 +16,11 @@ class SalonOwnerHome extends StatefulWidget {
 }
 
 class _SalonOwnerHomeState extends State<SalonOwnerHome> {
+  String? currentUserId = FirebaseAuth.instance.currentUser?.uid;
+
   @override
   Widget build(BuildContext context) {
+    log(currentUserId.toString());
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
@@ -56,10 +61,7 @@ class _SalonOwnerHomeState extends State<SalonOwnerHome> {
                 padding: EdgeInsets.all(20.w),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [
-                      Color(0xffB5362D),
-                      Color(0xffD4453A),
-                    ],
+                    colors: [Color(0xffB5362D), Color(0xffD4453A)],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -95,9 +97,9 @@ class _SalonOwnerHomeState extends State<SalonOwnerHome> {
                   ],
                 ),
               ),
-              
+
               SizedBox(height: 30.h),
-              
+
               Text(
                 "Quick Actions",
                 style: TextStyle(
@@ -106,9 +108,9 @@ class _SalonOwnerHomeState extends State<SalonOwnerHome> {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              
+
               SizedBox(height: 16.h),
-              
+
               // Action Cards
               _buildActionCard(
                 title: "ADD YOUR SALON",
@@ -121,9 +123,9 @@ class _SalonOwnerHomeState extends State<SalonOwnerHome> {
                   );
                 },
               ),
-              
+
               SizedBox(height: 16.h),
-              
+
               _buildActionCard(
                 title: "VIEW SALON'S",
                 subtitle: "Check all your registered salons",
@@ -131,16 +133,14 @@ class _SalonOwnerHomeState extends State<SalonOwnerHome> {
                 onTap: () {
                   // Navigate to view salons screen
                   Navigator.push(
-  context,
-  MaterialPageRoute(
-    builder: (context) => ViewSalonsScreen(),
-  ),
-);
+                    context,
+                    MaterialPageRoute(builder: (context) => ViewSalonsScreen()),
+                  );
                 },
               ),
-              
+
               SizedBox(height: 16.h),
-              
+
               _buildActionCard(
                 title: "MANAGE SALON'S",
                 subtitle: "Edit salon details and services",
@@ -155,9 +155,9 @@ class _SalonOwnerHomeState extends State<SalonOwnerHome> {
                   );
                 },
               ),
-              
+
               SizedBox(height: 30.h),
-              
+
               // Stats Cards Row
               Row(
                 children: [
@@ -221,11 +221,7 @@ class _SalonOwnerHomeState extends State<SalonOwnerHome> {
                 color: Color(0xffB5362D).withOpacity(0.1),
                 borderRadius: BorderRadius.circular(12.r),
               ),
-              child: Icon(
-                icon,
-                color: Color(0xffB5362D),
-                size: 24.sp,
-              ),
+              child: Icon(icon, color: Color(0xffB5362D), size: 24.sp),
             ),
             SizedBox(width: 16.w),
             Expanded(
@@ -287,11 +283,7 @@ class _SalonOwnerHomeState extends State<SalonOwnerHome> {
       ),
       child: Column(
         children: [
-          Icon(
-            icon,
-            color: Color(0xffB5362D),
-            size: 24.sp,
-          ),
+          Icon(icon, color: Color(0xffB5362D), size: 24.sp),
           SizedBox(height: 8.h),
           Text(
             value,

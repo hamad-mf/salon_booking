@@ -19,7 +19,7 @@ class SalonAddController with ChangeNotifier {
     String description = "not available",
   }) async {
     try {
-       isloading = true;
+      isloading = true;
       notifyListeners();
       log("called on salon add");
 
@@ -31,8 +31,8 @@ class SalonAddController with ChangeNotifier {
           message: "Please try again",
           bg: Colors.red,
         );
-          isloading = true;
-      notifyListeners();
+        isloading = true;
+        notifyListeners();
         return false;
       }
 
@@ -40,21 +40,22 @@ class SalonAddController with ChangeNotifier {
       log("Salon owner's ui is ${uid}");
 
       await FirebaseFirestore.instance.collection('salons').add({
+        'userId': FirebaseAuth.instance.currentUser?.uid,
         'salon name': salonName,
         'no of seats': no_of_seats,
         'phone number': phone_no,
         'address': address,
-        'latitude':latitude,
-        'longitude':longitude
+        'latitude': latitude,
+        'longitude': longitude,
       });
-       isloading = false;
+      isloading = false;
       notifyListeners();
       return true; // Success
     } catch (e) {
       log("error adding Salon $e");
-        isloading = false;
+      isloading = false;
       notifyListeners();
-       AppUtils.showOnetimeSnackbar(
+      AppUtils.showOnetimeSnackbar(
         context: context,
         message: "Failed to add salon, try again.",
         bg: Colors.red,

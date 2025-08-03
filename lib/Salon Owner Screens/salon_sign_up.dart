@@ -320,6 +320,7 @@ class _SalonSignUpState extends State<SalonSignUp> {
                               final signUpCtrl =
                                   context.read<SignUpController>();
                               await signUpCtrl.onRegistration(
+                                isuser: false,
                                 email: _emailController.text,
                                 password: _passwordController.text,
                                 context: context,

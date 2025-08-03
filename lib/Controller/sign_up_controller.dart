@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:salon_booking/Salon%20Owner%20Screens/salon_owner_home.dart';
 import 'package:salon_booking/Widgets/custom_bottom_navbar_screen.dart';
 import 'package:salon_booking/home_screen.dart';
 import 'package:salon_booking/onboarding_screen.dart';
@@ -17,8 +18,6 @@ class SignUpController with ChangeNotifier {
   Future<void> signOut(BuildContext context) async {
     try {
       await FirebaseAuth.instance.signOut();
-
-    
 
       Navigator.pushAndRemoveUntil(
         context,
@@ -39,6 +38,7 @@ class SignUpController with ChangeNotifier {
     required String email,
     required String password,
     required BuildContext context,
+    required bool isuser
   }) async {
     log("called on register");
     isLoading = true;
@@ -58,10 +58,26 @@ class SignUpController with ChangeNotifier {
           bg: Colors.green,
         );
 
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => CustomBottomNavbarScreen()),(route) => false,
-        );
+        final uid = credential.user!.uid;
+        final doc =
+            await FirebaseFirestore.instance
+                .collection('profile_details')
+                .doc(uid)
+                .get();
+
+        if (isuser ==true) {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (_) => CustomBottomNavbarScreen()),
+            (route) => false,
+          );
+        } else {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (_) => SalonOwnerHome()),
+            (route) => false,
+          );
+        }
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -113,12 +129,36 @@ class SignUpController with ChangeNotifier {
       final String uid = user.uid;
       log("User's uid is : $uid");
 
+      // Store profile with role
       await FirebaseFirestore.instance
           .collection('profile_details')
           .doc(uid)
-          .set({'name': name, 'phone number': phn,'role':role});
+          .set({'name': name, 'phone number': phn, 'role': role});
+
+      // Store login status
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      if (role == 'owner') {
+        await prefs.setBool('isOwnerLoggedIn', true);
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (_) => SalonOwnerHome()),
+          (route) => false,
+        );
+      } else {
+        await prefs.setBool('isLoggedIn', true);
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (_) => CustomBottomNavbarScreen()),
+          (route) => false,
+        );
+      }
     } catch (e) {
-      log("error addng profile $e");
+      log("error adding profile $e");
+      AppUtils.showOnetimeSnackbar(
+        context: context,
+        message: "Something went wrong",
+        bg: Colors.red,
+      );
     }
   }
 }

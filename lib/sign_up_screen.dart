@@ -314,26 +314,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         SizedBox(height: 20.h),
                         InkWell(
-                         onTap: () async {
-  if (_formKey.currentState!.validate()) {
-    final signUpCtrl = context.read<SignUpController>();
-    await signUpCtrl.onRegistration(
-      email: _emailController.text,
-      password: _passwordController.text,
-      context: context,
-    );
-    // Check: If registration failed, don't proceed
-    if (FirebaseAuth.instance.currentUser != null) {
-      await signUpCtrl.onAddProfile(
-        name: _nameController.text,
-        role: "user",
-        phn: _phoneNumberController.text,
-        context: context,
-      );
-    }
-  }
-}
-,
+                          onTap: () async {
+                            if (_formKey.currentState!.validate()) {
+                              final signUpCtrl =
+                                  context.read<SignUpController>();
+                              await signUpCtrl.onRegistration(
+                                isuser: true,
+                                email: _emailController.text,
+                                password: _passwordController.text,
+                                context: context,
+                              );
+                              // Check: If registration failed, don't proceed
+                              if (FirebaseAuth.instance.currentUser != null) {
+                                await signUpCtrl.onAddProfile(
+                                  name: _nameController.text,
+                                  role: "user",
+                                  phn: _phoneNumberController.text,
+                                  context: context,
+                                );
+                              }
+                            }
+                          },
                           child:
                               context.watch<SignUpController>().isLoading
                                   ? Center(child: CircularProgressIndicator())
