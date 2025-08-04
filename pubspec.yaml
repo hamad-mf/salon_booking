@@ -46,6 +46,7 @@ dependencies:
   geocoding: ^4.0.0
   permission_handler: ^11.0.1
   intl: ^0.20.2
+  google_maps_flutter: ^2.12.3
 
 dev_dependencies:
   flutter_test:
@@ -74,7 +75,7 @@ flutter:
     - assets/splash_logo.png
     - assets/onboarding_bg.png
     - assets/google_logo.png
-    - assets/salon_owner_png.png
+    - assets/salon_owner_png.jpg
     - assets/user_home_bg.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see

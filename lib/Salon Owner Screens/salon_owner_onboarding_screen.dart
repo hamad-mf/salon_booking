@@ -16,7 +16,7 @@ class SalonOwnerOnboardingScreen extends StatelessWidget {
           // Background Image - fills the whole screen
           Positioned.fill(
             child: Image.asset(
-              'assets/salon_owner_png.png', // Your image path
+              'assets/salon_owner_png.jpg', // Your image path
               fit: BoxFit.cover,
             ),
           ),
