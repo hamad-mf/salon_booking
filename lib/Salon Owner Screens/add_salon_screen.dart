@@ -645,80 +645,103 @@ void _updateManualLocation() {
     );
   }
 
-  Future<void> _getCurrentLocation() async {
-    setState(() {
-      _isLoadingLocation = true;
-    });
+Future<void> _getCurrentLocation() async {
+  setState(() {
+    _isLoadingLocation = true;
+  });
 
-    try {
-      // Check if location services are enabled
-      bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-      if (!serviceEnabled) {
-        throw Exception('Location services are disabled.');
-      }
-
-      // Check location permissions
-      LocationPermission permission = await Geolocator.checkPermission();
-      if (permission == LocationPermission.denied) {
-        permission = await Geolocator.requestPermission();
-        if (permission == LocationPermission.denied) {
-          throw Exception('Location permissions are denied');
-        }
-      }
-
-      if (permission == LocationPermission.deniedForever) {
-        throw Exception('Location permissions are permanently denied');
-      }
-
-      // Get current position
-      Position position = await Geolocator.getCurrentPosition(
-        // ignore: deprecated_member_use
-        desiredAccuracy: LocationAccuracy.high,
-      );
-
-      // Get address from coordinates
-      List<Placemark> placemarks = await placemarkFromCoordinates(
-        position.latitude,
-        position.longitude,
-      );
-
-      if (placemarks.isNotEmpty) {
-        Placemark place = placemarks[0];
-        String address = [
-          place.name,
-          place.street,
-          place.locality,
-          place.administrativeArea,
-          place.country,
-        ].where((element) => element != null && element.isNotEmpty).join(', ');
-
-        setState(() {
-          _latitude = position.latitude;
-          _longitude = position.longitude;
-          _addressController.text = address;
-        });
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text("Location retrieved successfully!"),
-            backgroundColor: Colors.green,
-          ),
-        );
-      }
-    } catch (e) {
-      log(e.toString());
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Error getting location: ${e.toString()}"),
-          backgroundColor: Colors.red,
+  try {
+    // Check if location services are enabled
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      // Ask user to enable location services
+      await showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text("Enable Location"),
+          content: Text("Location services are disabled. Please enable them in settings."),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("Cancel"),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                Navigator.of(context).pop();
+                await Geolocator.openLocationSettings();
+              },
+              child: Text("Open Settings"),
+            ),
+          ],
         ),
       );
-    } finally {
-      setState(() {
-        _isLoadingLocation = false;
-      });
+      return;
     }
+
+    // Check location permissions
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        throw Exception('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      throw Exception('Location permissions are permanently denied');
+    }
+
+    // Get current position
+    Position position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.high,
+    );
+
+    // Get address from coordinates
+    List<Placemark> placemarks = await placemarkFromCoordinates(
+      position.latitude,
+      position.longitude,
+    );
+
+    if (placemarks.isNotEmpty) {
+      Placemark place = placemarks[0];
+      String address = [
+        place.name,
+        place.street,
+        place.locality,
+        place.administrativeArea,
+        place.country,
+      ].where((element) => element != null && element.isNotEmpty).join(', ');
+
+      setState(() {
+        _latitude = position.latitude;
+        _longitude = position.longitude;
+        _addressController.text = address;
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Location retrieved successfully!"),
+          backgroundColor: Colors.green,
+        ),
+      );
+    }
+  } catch (e) {
+    log(e.toString());
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Error getting location: ${e.toString()}"),
+        backgroundColor: Colors.red,
+      ),
+    );
+  } finally {
+    setState(() {
+      _isLoadingLocation = false;
+    });
   }
+}
+
 
  Widget _buildCompactInputField({
   required String label,

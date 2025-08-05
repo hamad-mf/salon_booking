@@ -48,7 +48,7 @@ class _SalonDetailScreenState extends State<SalonDetailScreen> {
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    // ignore: deprecated_member_use
+                   
                     color: Colors.black.withOpacity(0.2),
                     blurRadius: 8,
                     offset: Offset(0, 2),
@@ -68,7 +68,7 @@ class _SalonDetailScreenState extends State<SalonDetailScreen> {
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      // ignore: deprecated_member_use
+              
                       color: Colors.black.withOpacity(0.2),
                       blurRadius: 8,
                       offset: Offset(0, 2),

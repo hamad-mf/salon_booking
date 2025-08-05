@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:salon_booking/Controller/sign_up_controller.dart';
 import 'package:salon_booking/Salon%20Owner%20Screens/salon_login.dart';
-import 'package:salon_booking/login_screen.dart';
+
 
 class SalonSignUp extends StatefulWidget {
   const SalonSignUp({super.key});

@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salon_booking/Salon%20Owner%20Screens/salon_login.dart';
 import 'package:salon_booking/Salon%20Owner%20Screens/salon_sign_up.dart';
-import 'package:salon_booking/login_screen.dart';
-import 'package:salon_booking/sign_up_screen.dart';
+
 
 class SalonOwnerOnboardingScreen extends StatelessWidget {
   const SalonOwnerOnboardingScreen({super.key});

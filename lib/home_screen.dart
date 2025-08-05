@@ -5,12 +5,12 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
-import 'package:salon_booking/Controller/sign_up_controller.dart';
+
+
 import 'package:salon_booking/Widgets/search_field.dart';
-import 'package:salon_booking/booking_status_screen.dart';
+
 import 'package:salon_booking/salon_detail_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

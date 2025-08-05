@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:salon_booking/find_haircut_screen.dart';
+import 'package:salon_booking/face_scan_screen.dart';
 import 'package:salon_booking/home_screen.dart';
 import 'package:salon_booking/map_screen.dart';
 import 'package:salon_booking/profile_screen.dart';
@@ -20,7 +20,7 @@ class _CustomBottomNavbarScreenState extends State<CustomBottomNavbarScreen> {
   final List<Widget> _screens = [
     HomeScreen(),
     MapScreen(),
-    FindHaircutScreen(),
+    FaceScanScreen(),
     ProfileScreen(),
   ];
 
@@ -38,7 +38,7 @@ class _CustomBottomNavbarScreenState extends State<CustomBottomNavbarScreen> {
     {
       'selectedIcon': Icons.face,
       'unselectedIcon': Icons.face_outlined,
-      'label': 'Find Cut',
+      'label': 'Smart mirror',
     },
     {
       'selectedIcon': Icons.person,
@@ -68,7 +68,7 @@ class _CustomBottomNavbarScreenState extends State<CustomBottomNavbarScreen> {
               },
               child: AnimatedContainer(
                 duration: Duration(milliseconds: 300),
-                padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 25.w),
+                padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
                 decoration:
                     isSelected
                         ? BoxDecoration(

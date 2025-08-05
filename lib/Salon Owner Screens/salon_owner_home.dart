@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:salon_booking/Controller/sign_up_controller.dart';
 import 'package:salon_booking/Salon%20Owner%20Screens/add_salon_screen.dart';
+import 'package:salon_booking/Salon%20Owner%20Screens/manage_salon_screen.dart';
 import 'package:salon_booking/Salon%20Owner%20Screens/view_salons_Screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:developer';
@@ -147,10 +148,10 @@ class _SalonOwnerHomeState extends State<SalonOwnerHome> {
                 icon: Icons.settings,
                 onTap: () {
                   // Navigate to manage salons screen
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text("Manage Salons feature coming soon!"),
-                      backgroundColor: Color(0xffB5362D),
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ManageSalonsScreen(),
                     ),
                   );
                 },
